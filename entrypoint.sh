@@ -28,14 +28,15 @@ then
     DATA="${DATA} $(printf '"body":"Automated release based on keyword: %s",' "$*")"
     DATA="${DATA} $(printf '"draft":false, "prerelease":false}')"
 
-    URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/releases"
-    HEADER="Authorization:Bearer ${GITHUB_TOKEN}"
+    TOKEN="${GITHUB_TOKEN}"
+    URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/releases -A bearer -a $TOKEN"
+
 
     if [[ "${LOCAL_TEST}" == *"true"* ]];
     then
         echo "## [TESTING] Keyword was found but no release was created."
     else
-        echo $DATA | http POST $URL pie.dev/headers $HEADER | jq .
+        echo $DATA | http POST $URL | jq .
     fi
 # otherwise
 else
