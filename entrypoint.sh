@@ -29,7 +29,7 @@ then
     DATA="${DATA} $(printf '"draft":false, "prerelease":false}')"
 
     URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/releases"
-    HEADER="authorization:Bearer ${GITHUB_TOKEN}"
+    HEADER="Authorization: token ${GITHUB_TOKEN}"
 
     if [[ "${LOCAL_TEST}" == *"true"* ]];
     then
