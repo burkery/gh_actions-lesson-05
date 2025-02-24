@@ -29,13 +29,13 @@ then
     DATA="${DATA} $(printf '"draft":false, "prerelease":false}')"
 
     URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/releases"
-    HEADER="X-API-Token:${GITHUB_TOKEN}"
+    HEADER="Authorization:Bearer ${GITHUB_TOKEN}"
 
     if [[ "${LOCAL_TEST}" == *"true"* ]];
     then
         echo "## [TESTING] Keyword was found but no release was created."
     else
-        echo $DATA | http POST $URL $HEADER | jq .
+        echo $DATA | http POST $URL pie.dev/headers $HEADER | jq .
     fi
 # otherwise
 else
